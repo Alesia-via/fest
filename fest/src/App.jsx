@@ -6,6 +6,7 @@ import Header from './components/header'
 import Home from './components/home'
 import About from './components/about'
 import Lineup from './components/lineup'
+import Schedule from './components/schedule'
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Home />
       <About />
       <Lineup />
+      <Schedule />  
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
