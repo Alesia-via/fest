@@ -1,4 +1,13 @@
+import { useState } from "react";
+
+
 export default function Schedule() {
+ const [activeDay, setActiveDay] = useState("saturday");
+
+ const handleDayClick = (day) => {
+  setActiveDay(day);
+};
+
   return (
 <section id="schedule" className="bg-gray-100 min-h-screen py-20 px-4">
     <div>
@@ -8,16 +17,25 @@ export default function Schedule() {
         </div>
         <div className="flex flex-col max-w-[1200px] mx-auto mb-8">      
             <div className="grid grid-cols-3 gap-4 mb-8 bg-gray-200 px-2 py-1 rounded-xl">
-                <button data-state="inactive" data-day="friday" className="bg-transparent data-[state=active]:bg-white p-1 rounded-2xl text-center text-xs text-black ">Friday, July 15</button>
-                <button data-state="active" data-day="saturday" className="bg-transparent data-[state=active]:bg-white p-1 rounded-2xl text-center text-xs text-black ">Saturday, July 16</button>
-                <button data-state="inactive" data-day="sunday" className="bg-transparent data-[state=active]:bg-white p-1 rounded-2xl text-center text-xs text-black ">Sunday, July 17</button>
+                <button data-state="inactive" data-day="friday" 
+                 data-state={activeDay === "friday" ? "active" : "inactive"}
+                 onClick={() => handleDayClick("friday")} 
+                 className="bg-transparent data-[state=active]:bg-white p-1 rounded-2xl text-center text-xs text-black ">Friday, July 15</button>
+                <button data-state="active" data-day="saturday" 
+                 data-state={activeDay === "saturday" ? "active" : "inactive"}
+                 onClick={() => handleDayClick("saturday")} className="bg-transparent data-[state=active]:bg-white p-1 rounded-2xl text-center text-xs text-black ">Saturday, July 16</button>
+                <button data-state="inactive" data-day="sunday" 
+                 data-state={activeDay === "sunday" ? "active" : "inactive"}
+                 onClick={() => handleDayClick("sunday")} className="bg-transparent data-[state=active]:bg-white p-1 rounded-2xl text-center text-xs text-black ">Sunday, July 17</button>
             </div>
-            <div data-state="inactive" data-day="friday" className="data-[state=inactive]:hidden data-[state=active]:flex flex-col gap-4">
+            <div data-state="inactive" data-day="friday" 
+             data-state={activeDay === "friday" ? "active" : "inactive"} className="data-[state=inactive]:hidden data-[state=active]:flex flex-col gap-4">
                 
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
-                            <img src="style/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
+                            <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
                             <span className="text-xs text-gray-500">11:00 AM</span>
                         </div>
                         <div className="flex flex-col">
@@ -27,16 +45,17 @@ export default function Schedule() {
                     </div>
                     <div className="w-1/3 flex px-4 items-center justify-end py-4">
                         <div className="flex max-w-[120px] gap-1 rounded-md bg-blue-800 text-white px-0 py-0 inline-block">
-                            <img src="style/img/location-white.svg" alt="Location" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
+                            <img src="/img/location-white.svg" alt="Location" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
                             <span className="text-xs text-white mr-1">Cultural Stage</span>
                         </div>           
                     </div>
                 </div>
 
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
-                            <img src="style/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
+                            <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
                             <span className="text-xs text-gray-500">12:00 AM</span>
                             
                         </div>
@@ -47,12 +66,13 @@ export default function Schedule() {
                     </div>
                     <div className="w-1/3 flex px-4 items-center justify-end py-4">
                         <div className="flex max-w-[120px] gap-1 rounded-md bg-green-600 text-white px-0 py-0 inline-block">
-                            <img src="style/img/location-white.svg" alt="Location" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
+                            <img src="/img/location-white.svg" alt="Location" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
                             <span className="text-xs text-white mr-1">World Stage</span>
                         </div>           
                     </div>
                 </div>
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -72,7 +92,8 @@ export default function Schedule() {
                     </div>
                 </div>
               
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -91,7 +112,8 @@ export default function Schedule() {
                         </div>           
                     </div>
                 </div>
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -111,7 +133,8 @@ export default function Schedule() {
                     </div>
                 </div>
                            
-                 <div className="flex justify-between bg-white p-1 rounded-xl border-black gap-4 hover:shadow-md border">
+                 <div className="flex justify-between bg-white p-1 rounded-xl border-black gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300 border">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -135,9 +158,11 @@ export default function Schedule() {
                 
             </div>
                 
-            <div data-state="active" data-day="saturday" class="data-[state=inactive]:hidden data-[state=active]:flex flex-col gap-4">
+            <div data-state="active" data-day="saturday" 
+             data-state={activeDay === "saturday" ? "active" : "inactive"} class="data-[state=inactive]:hidden data-[state=active]:flex flex-col gap-4">
                 
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -157,7 +182,8 @@ export default function Schedule() {
                     </div>
                 </div>
                 
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -177,7 +203,8 @@ export default function Schedule() {
                     </div>
                 </div>
                 
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -197,7 +224,8 @@ export default function Schedule() {
                     </div>
                 </div>
               
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -217,7 +245,8 @@ export default function Schedule() {
                     </div>
                 </div>
            
-                 <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                 <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -238,7 +267,8 @@ export default function Schedule() {
                                    
                 </div>
                   
-                 <div className="flex justify-between bg-white p-1 rounded-xl border-black gap-4 hover:shadow-md border">
+                 <div className="flex justify-between bg-white p-1 rounded-xl border-black gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300 border">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -260,9 +290,11 @@ export default function Schedule() {
                 </div>
             </div>            
            
-            <div data-state="inactive" data-day="sunday" class="data-[state=inactive]:hidden data-[state=active]:flex flex-col gap-4">
+            <div data-state="inactive" data-day="sunday" 
+             data-state={activeDay === "sunday" ? "active" : "inactive"} class="data-[state=inactive]:hidden data-[state=active]:flex flex-col gap-4">
                 
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -282,7 +314,8 @@ export default function Schedule() {
                     </div>
                 </div>
                
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -302,7 +335,8 @@ export default function Schedule() {
                     </div>
                 </div>
               
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -322,7 +356,8 @@ export default function Schedule() {
                     </div>
                 </div>
                
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -342,7 +377,8 @@ export default function Schedule() {
                     </div>
                 </div>
                                 
-                 <div className="flex justify-between bg-white p-1 rounded-xl border-black gap-4 hover:shadow-md border">
+                 <div className="flex justify-between bg-white p-1 rounded-xl border-black gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300 border">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -364,7 +400,8 @@ export default function Schedule() {
                     
                 </div>
               
-                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md">
+                <div className="flex justify-between bg-white p-1 rounded-xl gap-4 hover:shadow-md active:shadow-sm
+  hover:scale-105 active:scale-95 transition-transform duration-300">
                     <div className="w-2/3  flex items-center gap-4 px-2 py-4">
                         <div className="flex justify-center items-center gap-1">
                             <img src="/img/clock-grey.svg" alt="clock" className="w-4 h-4 object-cover rounded-lg inline-block mr-1"/>
@@ -411,4 +448,5 @@ export default function Schedule() {
     </div>
 </section>
 
-  );}
+  );
+}
